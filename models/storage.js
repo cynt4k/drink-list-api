@@ -10,6 +10,6 @@ var storageSchema = new Schema({
 
 var Storage = mongoose.model('Storage', storageSchema);
 
-Storage.index({ drink: 1, location: 1 }, { unique: true });
+//Storage.index({ drink: 1, location: 1 }, { unique: true });
 
 module.exports = Storage;

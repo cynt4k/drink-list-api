@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var rolesSchema = new Schema({
     name: { type: String, unique: true, required: true },
-    rights: [new Schema({
+    rights: {
         order: { type: Boolean, default: false },
         orderhistory: { type: Boolean, default: false },
         manageusers: { type: Boolean, default: false },
@@ -12,7 +12,7 @@ var rolesSchema = new Schema({
         wallet: { type: Boolean, default: false },
         storage: { type: Boolean, default: false },
         drinks: { type: Boolean, default: false }
-    })]
+    }
 });
 
 var Roles = mongoose.model('Roles', rolesSchema);

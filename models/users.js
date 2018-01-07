@@ -18,18 +18,18 @@ var usersSchema = new Schema({
         required: true,
         trim: true
     },
-    name: [new Schema({
+    name: {
         firstname: String,
         lastname: String
-    })],
+    },
     balance: { type: Number, default: 0 },
-    rights: [new Schema({
+    rights: {
         globalrole: { type: Schema.Types.ObjectId, ref: 'Roles'},
         locations: [new Schema({
             location: { type: Schema.Types.ObjectId, ref: 'Locations' },
             role: { type: Schema.Types.ObjectId, ref: 'Roles' }
         })]
-    })]
+    }
 });
 
 usersSchema.virtual('fullname').get(function() {
