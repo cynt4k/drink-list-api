@@ -4,10 +4,23 @@ const db = require('../models/schemas'),
 
 module.exports = function(req, location, right, callback) {
 
-    let findUser = Rx.Observable.fromPromise(db.Users.findOne({ username: req.user.name }).exec());
+    let findUser = Rx.Observable.fromPromise(db.Users.findOne({ username: req.user.name }).exec())
+        .then(user => {
+            if (user)
+                next(user.rights);
+        });
+
+    if (!location) {
+        findUser.flatMap(role => rights.globalrole)
+            .mergeMap(role => Rx.Observable.fromPromise(db.Roles.findById(role).exec()))
+            .subscribe(rights => {
+                console.log(rights)
+            });
+    }
 
 
-    findUser
+
+/*    findUser
         .flatMap(user => {
             Rx.Observable.fromPromise(db.Users.)
         })
@@ -35,7 +48,7 @@ module.exports = function(req, location, right, callback) {
             }
         );
 
-
+*/
 
 
     /*let locations = [];
